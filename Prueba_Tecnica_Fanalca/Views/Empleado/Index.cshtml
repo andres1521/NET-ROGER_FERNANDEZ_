@@ -1,0 +1,94 @@
+﻿@using Prueba_Tecnica_Fanalca.Controllers;
+@model IEnumerable<Prueba_Tecnica_Fanalca.Models.DB.TblEmpleado>
+
+@{
+    ViewData["Title"] = "Lista de Empleados";
+
+    Pager pager = new Pager();
+
+    int pageNro = 0;
+
+    if(ViewBag.Pager != null)
+    {
+        pager = ViewBag.Pager;
+        pageNro = pager.CurrentPage;
+    }
+}
+
+<h1>Empleados</h1>
+
+<p>
+    <a asp-action="Create">Crear nuevo</a>
+</p>
+<div class="col-4 p-0 justify-content-end">
+    <form asp-controller="Empleado" asp-action="Index">
+        <span class="btn-group">
+            <input class="form-control" type="text" name="strbusquedaEmpNombre" placeholder="Buscar por nombre de Empleado" />
+            <br/>
+            <input class="form-control" type="text" name="numbusquedaDoc" placeholder="Buscar por Documento" />
+            <br />
+            <input class="p-1 ml-2 btn btn-sm btn-info" type="submit" value="Buscar" /> 
+        </span>
+    </form>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Apellido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumTipoDoc.TipoIdentificacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumDocumento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumArea.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumSubarea.Nombre)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="#listEmpleados">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Apellido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumTipoDoc.TipoIdentificacion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumDocumento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumArea.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumSubarea.Nombre)
+                </td>
+
+
+
+
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.NumEmpleadoId">Editar</a> |
+                    <a asp-action="Delete" asp-route-id="@item.NumEmpleadoId">Borrar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<partial name="pager" model="@pager"/>

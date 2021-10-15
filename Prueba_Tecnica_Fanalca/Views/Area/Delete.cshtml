@@ -1,0 +1,27 @@
+﻿@model Prueba_Tecnica_Fanalca.Models.DB.TblArea
+
+@{
+    ViewData["Title"] = "Borrar Área";
+}
+
+<h1>Borrar</h1>
+
+<h3>Esta seguro de borrar esto?</h3>
+<div>
+    <h4>Área</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="NumAreaId" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Volver al inicio</a>
+    </form>
+</div>
